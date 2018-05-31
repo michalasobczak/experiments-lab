@@ -2,18 +2,13 @@
    processor 6502 
    org    $1000 
 ; ---------------------
-;
-; ---------------------------------------------------------------------
-; KERNAL     [www.c64-wiki.com/wiki/Kernal]
-; MEMORY MAP [unusedino.de/ec64/technical/project64/memory_maps.html]
-; BASIC ROM  [www.c64-wiki.com/wiki/BASIC-ROM]
-; ---------------------------------------------------------------------
-;
 R_PRINT_STRING = $AB1E 
 R_SET_CURSOR   = $E50C 
 R_CLEAR_SCREEN = $E544
 R_PRINT_PNUM   = $BDCD ; 48589, Output positive integer number in accu/X reg
-R_SYNTAX_ERROR = $AF08; 44808, synerr, Output ?SYNTAX Error
+R_SYNTAX_ERROR = $AF08 ; 44808, synerr, Output ?SYNTAX Error
+R_POWER_MSG    = $E45F ; 58463	words	Power-Up Message
+R_DELAY        = $EEB4 ; eeb3	61107	-	Delay 1 ms
 ; ---------------------
 ; -- MACROS
   mac set_cursor
