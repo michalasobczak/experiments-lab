@@ -1,5 +1,6 @@
 # c64
 
-Commodore C64 research and development using C language as well as assembly. 
+Commodore C64 research and development.
 
-C development made with cc65. DASM assembler for assembly language.
+- C development in cc65. 
+- DASM assembler for assembly language.
