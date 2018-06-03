@@ -45,7 +45,7 @@ int* matMV(int a[], int b[]) {
 
 
 int * matS(int a[], int b[]) {
-  int *r = malloc(9);
+  int *r = malloc(9 * sizeof(int));
   printf("matS => sizeof(a) = %d\n", sizeof(a));
   printf("matS => sizeof(b) = %d\n", sizeof(b));
   /* */
