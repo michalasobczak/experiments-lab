@@ -42,3 +42,38 @@ int* matMV(int a[], int b[]) {
   
   return r;
 } /* matMV */
+
+
+int * matS(int a[], int b[]) {
+  int *r = malloc(9);
+  printf("matS => sizeof(a) = %d\n", sizeof(a));
+  printf("matS => sizeof(b) = %d\n", sizeof(b));
+  /* */
+  if(!r)
+    return NULL;
+  /* */
+  printf("matS => 0 => %d\n", a[0]);
+  r[0] = a[0]-b[0];
+  r[1] = a[1]-b[1];
+  r[2] = a[2]-b[2];
+  r[3] = a[3]-b[3];
+  r[4] = a[4]-b[4];
+  r[5] = a[5]-b[5];
+  r[6] = a[6]-b[6];
+  r[7] = a[7]-b[7];
+  r[8] = a[8]-b[8];
+  
+  return r;
+} /* matS */
+
+
+/*
+getB = function(dx,dy,dz) {
+    var newEntry = Vector2(0,0);
+    var ezDivDz = -700 / dz;
+    newEntry.x = -1*(dx*ezDivDz) + canvasWidthHalf;
+    newEntry.y = dy*ezDivDz;
+    return newEntry;
+  }
+}
+*/
