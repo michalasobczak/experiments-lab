@@ -5,15 +5,18 @@
 /* *********************** */
 int getT(int f, int val) {
   int newEntry = 0;
-   if (f == 0) {
-      newEntry = val; //Math.sin(val);
-      //printf("sin for %d\n", val);
-    }
-    else if (f == 1) {
-      newEntry = val; //Math.cos(val);
-      //printf("cos for %d\n", val);
-    }
-    return newEntry;
+  
+  // sin
+  if (f == 0) {
+    newEntry = 0; //Math.sin(val);
+    //printf("sin for %d\n", val);
+  }
+  // cos
+  else if (f == 1) {
+    newEntry = 1; //Math.cos(val);
+    //printf("cos for %d\n", val);
+  }
+  return newEntry;
 } /* getT */
 
 
@@ -64,7 +67,7 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   /* *********************** */
   /* PROGRAM                 */
   /* *********************** */
-  printf("p  => %d %d %d\n", x, y, z);
+  printf("\np  => %d %d %d\n", x, y, z);
   printf("c  => %d %d %d\n", cx, cy, cz);
   printf("th => %d %d %d\n", th_x, th_y, th_z);
   // getM
@@ -73,16 +76,19 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   d1[5] = -1 * getT(0, th_x);
   d1[7] = getT(0,th_x);
   d1[8] = getT(1,th_x);
+  printf("d1    => %d %d %d %d %d %d %d %d %d\n", d1[0],d1[1],d1[2],d1[3],d1[4],d1[5],d1[6],d1[7],d1[8]);
   // d2
   d2[0] = getT(1,th_y);
   d2[2] = getT(0,th_y);
   d2[6] = -1*getT(0,th_y);
   d2[8] = getT(1,th_y);
+  printf("d2    => %d %d %d %d %d %d %d %d %d\n", d2[0],d2[1],d2[2],d2[3],d2[4],d2[5],d2[6],d2[7],d2[8]);
   // d3
   d3[0] = getT(1,th_z);
   d3[1] = -1*getT(0,th_z);
   d3[3] = getT(0,th_z);
   d3[4] = getT(1,th_z);
+  printf("d3    => %d %d %d %d %d %d %d %d %d\n", d3[0],d3[1],d3[2],d3[3],d3[4],d3[5],d3[6],d3[7],d3[8]);
   // 
   //
   // matM
@@ -105,6 +111,7 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   matM[6] = p7;
   matM[7] = p8;
   matM[8] = p9;
+  printf("matM  => %d %d %d %d %d %d %d %d %d\n", matM[0],matM[1],matM[2],matM[3],matM[4],matM[5],matM[6],matM[7],matM[8]);
   //
   // matM2
   //var newEntry = matM(d1d2,d3);
@@ -126,6 +133,7 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   matM2[6] = p7;
   matM2[7] = p8;
   matM2[8] = p9;
+  printf("matM2 => %d %d %d %d %d %d %d %d %d\n",matM2[0],matM2[1],matM2[2],matM2[3],matM2[4],matM2[5],matM2[6],matM2[7],matM2[8]);
   // => d_1x2x3 = matM2
   //
   // d4 AND d5
@@ -157,12 +165,13 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   matS[0] = d4[0]-d5[0];
   matS[1] = d4[1]-d5[1];
   matS[2] = d4[2]-d5[2];
-  matS[3] = d4[3]-d5[3];
-  matS[4] = d4[4]-d5[4];
-  matS[5] = d4[5]-d5[5];
-  matS[6] = d4[6]-d5[6];
-  matS[7] = d4[7]-d5[7];
-  matS[8] = d4[8]-d5[8];
+  //matS[3] = d4[3]-d5[3];
+  //matS[4] = d4[4]-d5[4];
+  //matS[5] = d4[5]-d5[5];
+  //matS[6] = d4[6]-d5[6];
+  //matS[7] = d4[7]-d5[7];
+  //matS[8] = d4[8]-d5[8];
+  printf("matS  => %d %d %d %d %d %d %d %d %d\n",matS[0],matS[1],matS[2],matS[3],matS[4],matS[5],matS[6],matS[7],matS[8]);
   //
   /* *********************** */
   /* matMV                   */
@@ -175,16 +184,19 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   matMV[0] = p1;
   matMV[1] = p2;
   matMV[2] = p3;
+  printf("matMV => %d %d %d\n",matMV[0],matMV[1],matMV[2]);
   //
   /* *********************** */
   /* getB                    */
   /* *********************** */
   //var b = getB(d[0],d[1],d[2]);
   ezDivDz = -700 / matMV[2];
+  printf("matMV[2] => %d \n",matMV[2]);
+  printf("ezDivDz => %d \n",ezDivDz);
   newEntry_x = -1*(matMV[0]*ezDivDz) + canvasWidthHalf;
   newEntry_y = matMV[1]*ezDivDz;
   
-  printf("%d, %d\n", newEntry_x, newEntry_y);
+  printf("result => %d, %d\n", newEntry_x, newEntry_y);
   
   /* *********************** */
   /* return                  */

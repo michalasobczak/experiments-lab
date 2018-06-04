@@ -36,12 +36,13 @@ int main (void) {
     //tgi_clear();
     //tgi_setcolor(TGI_COLOR_WHITE);
     
-    while (1) {      
+    //while (1) {      
       ++line_x;
       ++line_y;
       //tgi_line(0, 0, line_x, line_y);
       
       /* Project 3D point onto 2D screen */
+      clrscr();
       transform3Into2_NEW(point_x,point_y,point_z, camera_x,camera_y,camera_z, camera_angle_x,camera_angle_y,camera_angle_z);
       
       if (i % 10 == 0 ) {
@@ -54,7 +55,7 @@ int main (void) {
       }
       
       ++i;
-    } /* while */
+   //} /* while */
 
     /* EXIT */
     return 0;
