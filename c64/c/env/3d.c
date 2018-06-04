@@ -27,6 +27,8 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   /* *********************** */
   /* DATA                    */
   /* *********************** */
+  // floating point factor
+  int factor = 40;
   //
   // matM                    
   int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
@@ -190,11 +192,11 @@ void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, 
   /* getB                    */
   /* *********************** */
   //var b = getB(d[0],d[1],d[2]);
-  ezDivDz = -700 / matMV[2];
+  ezDivDz = (-700*factor) / matMV[2];
   printf("matMV[2] => %d \n",matMV[2]);
-  printf("ezDivDz => %d \n",ezDivDz);
-  newEntry_x = -1*(matMV[0]*ezDivDz) + canvasWidthHalf;
-  newEntry_y = matMV[1]*ezDivDz;
+  printf("ezDivDz => [%d] \n",ezDivDz);
+  newEntry_x = -1*(matMV[0]*ezDivDz)/factor + canvasWidthHalf;
+  newEntry_y = (matMV[1]*ezDivDz)/factor;
   
   printf("result => %d, %d\n", newEntry_x, newEntry_y);
   

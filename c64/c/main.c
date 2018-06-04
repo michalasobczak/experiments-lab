@@ -42,7 +42,7 @@ int main (void) {
       //tgi_line(0, 0, line_x, line_y);
       
       /* Project 3D point onto 2D screen */
-      clrscr();
+      //clrscr();
       transform3Into2_NEW(point_x,point_y,point_z, camera_x,camera_y,camera_z, camera_angle_x,camera_angle_y,camera_angle_z);
       
       if (i % 10 == 0 ) {
@@ -53,6 +53,8 @@ int main (void) {
         line_x = 0;
         line_y = 0;
       }
+      
+      printf("%d\n", i);
       
       ++i;
    //} /* while */
