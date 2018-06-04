@@ -1,39 +1,3 @@
-int * matMV(int a[], int b[]) {
-  int p1,p2,p3 = 0;
-  static int r[3];
-
-  p1 = a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
-  p2 = a[3]*b[0] + a[4]*b[1] + a[5]*b[2];
-  p3 = a[6]*b[0] + a[7]*b[1] + a[8]*b[2];
-  
-  r[0] = p1;
-  r[1] = p2;
-  r[2] = p3;
-  
-  return r;
-} /* matMV */
-
-
-int * matS(int a[], int b[]) {
-  int *r = malloc(9 * sizeof(int));
-  /* */
-  if(!r)
-    return NULL;
-  /* */
-  r[0] = a[0]-b[0];
-  r[1] = a[1]-b[1];
-  r[2] = a[2]-b[2];
-  r[3] = a[3]-b[3];
-  r[4] = a[4]-b[4];
-  r[5] = a[5]-b[5];
-  r[6] = a[6]-b[6];
-  r[7] = a[7]-b[7];
-  r[8] = a[8]-b[8];
-  
-  return r;
-} /* matS */
-
-
 /* *********************** */
 /* getT                    */
 /*   sin = 0               */
@@ -43,9 +7,11 @@ int getT(int f, int val) {
   int newEntry = 0;
    if (f == 0) {
       newEntry = val; //Math.sin(val);
+      //printf("sin for %d\n", val);
     }
     else if (f == 1) {
       newEntry = val; //Math.cos(val);
+      //printf("cos for %d\n", val);
     }
     return newEntry;
 } /* getT */
@@ -54,16 +20,16 @@ int getT(int f, int val) {
 /* *********************** */
 /* transform3Into2_NEW     */
 /* *********************** */
-int transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, int th_y, int th_z) {
+void transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, int th_y, int th_z) {
   /* *********************** */
   /* DATA                    */
   /* *********************** */
-  
+  //
   // matM                    
   int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
-  int matM[9];
-  int matM2[9];
-  
+  int matM[9] = {0,0,0,0,0,0,0,0,0};
+  int matM2[9] = {0,0,0,0,0,0,0,0,0};
+  //
   // getM                    
   // var d_1x2x3 = getM(th);
   int d1[9] = {
@@ -74,14 +40,33 @@ int transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, i
     100,             0,                100                ,
     0,               1,                0                  ,
     100,             0,                100                };
-    int d3[] = {
+  int d3[] = {
     100,            100,               0                  ,
     100,            100,               0                  ,
     0,              0,                 1                  };
-    
+  //
+  // d4 AND d5
+  int d4[3] = {0,0,0};
+  int d5[3] = {0,0,0};
+  //
+  // matS
+  int matS[9] = {0,0,0,0,0,0,0,0,0};
+  //
+  // matMV
+  int matMV[3];
+  //
+  // getB
+  int ezDivDz = 0;
+  int newEntry_x = 0;
+  int newEntry_y = 0;
+  int canvasWidthHalf = 160;
+  //
   /* *********************** */
   /* PROGRAM                 */
   /* *********************** */
+  printf("p  => %d %d %d\n", x, y, z);
+  printf("c  => %d %d %d\n", cx, cy, cz);
+  printf("th => %d %d %d\n", th_x, th_y, th_z);
   // getM
   // d1
   d1[4] = getT(1, th_x);
@@ -99,7 +84,7 @@ int transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, i
   d3[3] = getT(0,th_z);
   d3[4] = getT(1,th_z);
   // 
-  
+  //
   // matM
   //var d1d2 = matM(d1,d2);  
   p1 = d1[0]*d2[0] + d1[1]*d2[3] + d1[2]*d2[6];
@@ -120,12 +105,30 @@ int transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, i
   matM[6] = p7;
   matM[7] = p8;
   matM[8] = p9;
-  
+  //
   // matM2
   //var newEntry = matM(d1d2,d3);
-  
- 
-  
+  p1 = matM[0]*d3[0] + matM[1]*d3[3] + matM[2]*d3[6];
+  p2 = matM[0]*d3[1] + matM[1]*d3[4] + matM[2]*d3[7];
+  p3 = matM[0]*d3[2] + matM[1]*d3[5] + matM[2]*d3[8];
+  p4 = matM[3]*d3[0] + matM[4]*d3[3] + matM[5]*d3[6];
+  p5 = matM[3]*d3[1] + matM[4]*d3[4] + matM[5]*d3[7];
+  p6 = matM[3]*d3[2] + matM[4]*d3[5] + matM[5]*d3[8];
+  p7 = matM[6]*d3[0] + matM[7]*d3[3] + matM[8]*d3[6];
+  p8 = matM[6]*d3[1] + matM[7]*d3[4] + matM[8]*d3[7];
+  p9 = matM[6]*d3[2] + matM[7]*d3[5] + matM[8]*d3[8];
+  matM2[0] = p1;
+  matM2[1] = p2;
+  matM2[2] = p3;
+  matM2[3] = p4;
+  matM2[4] = p5;
+  matM2[5] = p6;
+  matM2[6] = p7;
+  matM2[7] = p8;
+  matM2[8] = p9;
+  // => d_1x2x3 = matM2
+  //
+  // d4 AND d5
   /*
   var d4 = [
     x,
@@ -138,24 +141,54 @@ int transform3Into2_NEW(int x, int y, int z, int cx, int cy, int cz, int th_x, i
     cz
   ];
   */
-
+  // d4
+  d4[0] = x;
+  d4[1] = y;
+  d4[2] = z;
+  // d5
+  d5[0] = cx;
+  d5[1] = cy;
+  d5[2] = cz;
+  //
   /* *********************** */
   /* matS                    */
   /* *********************** */
   //var d4subd5 = matS(d4,d5);
-  
+  matS[0] = d4[0]-d5[0];
+  matS[1] = d4[1]-d5[1];
+  matS[2] = d4[2]-d5[2];
+  matS[3] = d4[3]-d5[3];
+  matS[4] = d4[4]-d5[4];
+  matS[5] = d4[5]-d5[5];
+  matS[6] = d4[6]-d5[6];
+  matS[7] = d4[7]-d5[7];
+  matS[8] = d4[8]-d5[8];
+  //
   /* *********************** */
   /* matMV                   */
   /* *********************** */
   //var d = matMV(d_1x2x3, d4subd5);
-  
+  // => matMV = f(matM2, matS)
+  p1 = matM2[0]*matS[0] + matM2[1]*matS[1] + matM2[2]*matS[2];
+  p2 = matM2[3]*matS[0] + matM2[4]*matS[1] + matM2[5]*matS[2];
+  p3 = matM2[6]*matS[0] + matM2[7]*matS[1] + matM2[8]*matS[2];
+  matMV[0] = p1;
+  matMV[1] = p2;
+  matMV[2] = p3;
+  //
   /* *********************** */
   /* getB                    */
   /* *********************** */
   //var b = getB(d[0],d[1],d[2]);
+  ezDivDz = -700 / matMV[2];
+  newEntry_x = -1*(matMV[0]*ezDivDz) + canvasWidthHalf;
+  newEntry_y = matMV[1]*ezDivDz;
+  
+  printf("%d, %d\n", newEntry_x, newEntry_y);
   
   /* *********************** */
   /* return                  */
   /* *********************** */
   //return b;
+  return;
 } /* transform3Into2_NEW */
