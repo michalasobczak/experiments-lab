@@ -43,8 +43,14 @@ int main (void) {
       
       /* Project 3D point onto 2D screen */      
       transform3Into2_NEW(&rxA,&ryA, point_x,point_y,point_z, camera_x,camera_y,camera_z, th_x,th_y,th_z);
-      transform3Into2_NEW(&rxB,&ryB, point_x+10,point_y+10,point_z+10, camera_x,camera_y,camera_z, th_x,th_y,th_z);
+      transform3Into2_NEW(&rxB,&ryB, point_x,point_y,point_z+100, camera_x,camera_y,camera_z, th_x,th_y,th_z);
       tgi_line(rxA, ryA, rxB, ryB);
+      transform3Into2_NEW(&rxA,&ryA, point_x+100,point_y,point_z+100, camera_x,camera_y,camera_z, th_x,th_y,th_z);
+      tgi_line(rxB, ryB, rxA, ryA);
+      transform3Into2_NEW(&rxB,&ryB, point_x+100,point_y,point_z, camera_x,camera_y,camera_z, th_x,th_y,th_z);
+      tgi_line(rxA, ryA, rxB, ryB);
+      transform3Into2_NEW(&rxA,&ryA, point_x,point_y,point_z, camera_x,camera_y,camera_z, th_x,th_y,th_z);
+      tgi_line(rxB, ryB, rxA, ryA);
       
       if (i % 10 == 0 ) {
         tgi_clear();         
