@@ -11,6 +11,7 @@
 
 
 /* DATA */
+Vector2 * vector2;
 
 
 /* MAIN */
@@ -18,27 +19,11 @@ int main (void) {
     int line_x = 0;
     int line_y = 0;
     int i = 0;
-    int j = 0;
-    int * c;
-    int * d;
     
     /* ******* */
     /* GENERIC */
     /* ******* */
-    int a[9] = {10,10,10,10,10,10,10,10,10};
-    int b[9] = {100,1,2,3,4,5,6,7,8};
-    c = matS(a, b);  
-    printf("main => c addr => %p\n", c); 
-    for (j; j<=8; j++) {
-      printf("main => for c[j] => %i\n", *(c+j));     
-    }
-    free(c);
-    /* MOD */
-    a[0] = 13;
-    d = matS(a,b);
-    printf("main => d[0] => %i\n", *(d+0)); 
-    free(d);
-    /* ******* */
+
     
     /* WAIT */
     cprintf("%s\n", "PRESS KEY TO PROCEED");    
@@ -54,6 +39,9 @@ int main (void) {
       ++line_x;
       ++line_y;
       tgi_line(0, 0, line_x, line_y);
+      
+      /* Project 3D point onto 2D screen */
+      transform3Into2_NEW(0,0,0, 1,1,1, 2,2,2);
       
       if (i % 10 == 0 ) {
         tgi_clear();          
