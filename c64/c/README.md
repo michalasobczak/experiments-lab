@@ -16,7 +16,8 @@ One may notice that binary code generated with this tool is way bigger comparing
 
 To import custom OBJ model file made in Blender you need to run as follows:
 
-```cd models
+```
+cd models
 ruby 0_parsed.rb your_file.obj 
 ```
 
