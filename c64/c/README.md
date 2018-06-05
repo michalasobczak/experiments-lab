@@ -2,7 +2,7 @@
 
 The C language for Commodore 64 made possible by using cc65 package which includes compiler, assembler and linker.
 
-# Introduction
+## Introduction
 
 To compile, run the following command:
 
