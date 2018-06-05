@@ -28,7 +28,7 @@ void transform3Into2_NEW(int * rx, int * ry, int x, int y, int z, int cx, int cy
   /* DATA                    */
   /* *********************** */
   // floating point factor
-  int factor = 40;
+  int factor = 10;
   //
   // matM                    
   int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
