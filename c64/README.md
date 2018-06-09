@@ -2,5 +2,6 @@
 
 Commodore C64 research and development.
 
-- C development in cc65. 
-- DASM assembler for assembly language.
+- ANSI C development in cc65
+- DASM assembler for assembly language
+- BASIC 2.0
