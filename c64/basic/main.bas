@@ -1,5 +1,6 @@
 1 rem ***** start *****
 2 t1=ticks: t2=0
+3 ? "=> data initialization"
 
 20 rem ***** data *****
 21 v=0: f=0: ne=0
@@ -26,6 +27,8 @@
 42   ms(6)=0: ms(7)=0: ms(8)=0
 43 dim mv(2)
 44 dz=0: nx=0: ny=0: ch=160
+45 re=0
+46 px=250: py=40: pz=1500
 
 49 gosub 900: goto 1000
 
@@ -39,7 +42,8 @@
 70 return
 
 100 rem ***** transform3into2_new *****
-101 return
+101 f=1: v=tx: gosub 50: d1(4)=ne
+299 return
 
 900 rem ****** ticks ******
 901 t2 = ticks
@@ -48,6 +52,13 @@
 
 1000 rem ****** main ******
 1001 ? "=> starting"
-1002 :
+1002 ? " => tick"
+1003 px=250: py=40: pz=1500
+1004 cx=200: cy=335: cz=-250
+1005 tx=0: ty=0: tz=0
+1006 gosub 100
+1007 gosub 900
+1008 :
 
+1998 ? "=> finish"
 1999 end
