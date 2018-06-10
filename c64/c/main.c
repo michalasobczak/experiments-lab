@@ -84,6 +84,7 @@ void tgi() {
 /* ********* */
 int main (void) {    
     int i = 0;
+    int direction = 1;
     /* WAIT */
     cprintf("%s\n", "PRESS KEY TO PROCEED");    
     cgetc();
@@ -95,7 +96,13 @@ int main (void) {
       /* PROJECTION */
       draw_model();
       // MOVE
-      start_x+=2;
+      start_x+=2*direction; 
+      if (start_x>=200) {
+        direction = -1;
+      }
+      else if (start_x <= 100) {
+        direction = 1;
+      }
       ++i;
     } /* while */
     /* EXIT */
