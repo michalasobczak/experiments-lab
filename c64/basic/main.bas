@@ -39,18 +39,18 @@
 70 return
 
 100 rem ***** transform3into2_new *****
-101 ?"S": t1=ticks: fs=1: v=tx: gosub 50: d1(4)=nb
-102   fs=0: v=tx: gosub 50: d1(5)=-1*nb
-103   fs=0: v=tx: gosub 50: d1(7)=nb
-104   fs=1: v=tx: gosub 50: d1(8)=nb
-105 fs=1: v=ty: gosub 50: d2(0)=nb
-106   fs=0: v=ty: gosub 50: d2(2)=nb
-107   fs=0: v=ty: gosub 50: d2(6)=-1*nb
-108   fs=1: v=ty: gosub 50: d2(8)=nb
-109 fs=1: v=tz: gosub 50: d3(0)=nb
-110   fs=0: v=tz: gosub 50: d3(1)=-1*nb
-111   fs=0: v=tz: gosub 50: d3(3)=nb
-112   fs=1: v=tz: gosub 50: d3(4)=nb
+101 ?"...": t1=ticks: fs=1: v=tx: d1(4)=1
+102   fs=0: v=tx: d1(5)=-1*0
+103   fs=0: v=tx: d1(7)=0
+104   fs=1: v=tx: d1(8)=1
+105 fs=1: v=ty: d2(0)=1
+106   fs=0: v=ty: d2(2)=0
+107   fs=0: v=ty: d2(6)=-1*0
+108   fs=1: v=ty: d2(8)=1
+109 fs=1: v=tz: d3(0)=1
+110   fs=0: v=tz: d3(1)=-1*0
+111   fs=0: v=tz: d3(3)=0
+112   fs=1: v=tz: d3(4)=1
 113     rem for i=0 to 8 step 1: ? d1(i);: next i: ? " "
 114     rem for i=0 to 8 step 1: ? d2(i);: next i: ? " "
 115     rem for i=0 to 8 step 1: ? d3(i);: next i: ? " "
@@ -96,10 +96,10 @@
 190 mv(0)=p1: mv(1)=p2: mv(2)=p3
 191   rem for i=0 to 2 step 1: ? mv(i);: next i: ? " "
 192     ?"192",:gosub 900
-200 dz=(-700*fa)/mv(2)
-201 nx=-1*(mv(0)*dz)/fa + ch
-202 ny=(mv(1)*dz)/fa
-210 ?px,py,pz: ?nx,ny 
+200 dz=(-700)/mv(2)
+201 nx=-1*(mv(0)*dz) + ch
+202 ny=(mv(1)*dz)
+210 rem ?px,py,pz: ?nx,ny 
 211   ?"211",:gosub 900
 299 return
 
