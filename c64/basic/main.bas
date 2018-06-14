@@ -1,6 +1,8 @@
+0 ? fre(1)+65536
 1 rem ***** start *****
 2 t1=ticks: t2=0
 3 ? "=> data initialization"
+4 ? fre(1)+65536
 
 20 rem ***** data *****
 21 v=0: fs=0: nb=5
@@ -30,6 +32,7 @@
 45 re=0
 46 px=250: py=40: pz=1500
 47 cx=200: cy=335: cz=-250
+48 ? fre(1)+65536
 
 49 gosub 900: goto 1000
 
@@ -114,11 +117,12 @@
 1003 px=250: py=40: pz=1500
 1004 cx=200: cy=335: cz=-250
 1005 tx=0: ty=0: tz=0
-1006 gosub 100
-1007 gosub 100
-1008 gosub 100
-1009 gosub 100
-1010 gosub 100
+1006 gosub 100: ? fre(1)+65536
+1007 gosub 100: ? fre(1)+65536
+1008 gosub 100: ? fre(1)+65536
+1009 gosub 100: ? fre(1)+65536
+1010 gosub 100: ? fre(1)+65536
 
 3000 ? "=> finish"
 3001 end
+3002 ? fre(1)+65536
