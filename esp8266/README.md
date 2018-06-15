@@ -22,7 +22,7 @@ Script can be found in nodemcu-firmware repository. After this you need to put f
 
 
 ## Performance
-At 80MHZ clock speed it reaches 300 vertices per second. Changing CPU clock speed to 160 MHZ it yields 600 vertices per second.
+At 80MHz clock speed it reaches 300 vertices per second. Changing CPU clock speed to 160 MHz it yields 600 vertices per second. Program starts from ```41424``` KB of free heap space and ends with 24792 KB.
 
 
 ## Objectives
