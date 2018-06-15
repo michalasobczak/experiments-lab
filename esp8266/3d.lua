@@ -185,6 +185,7 @@ end -- transform3Into2_NEW
 -- ***********************
 --  MAIN
 -- ***********************
+node.setcpufreq(node.CPU160MHZ)
 px=250
 py=40
 pz=1500
@@ -195,9 +196,13 @@ tx=0
 ty=0
 tz=0
 
-local x = os.clock()
-local s = 0
-for i=1,1000 do
+--local x = os.clock()
+--local s = 0
+t1=tmr.now()
+print("RUN")
+for i=1,600 do
   result = transform3Into2_NEW(px,py,pz, cx,cy,cz, tx,ty,tz);
 end
-print(string.format("elapsed time: %.2f\n", os.clock() - x))
+t2=tmr.now()
+print("DIFF "..(t2-t1)/1000)
+--print(string.format("elapsed time: %.2f\n", os.clock() - x))
