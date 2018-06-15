@@ -73,19 +73,22 @@ transform3Into2_NEW = function(x,y,z, cx,cy,cz, th_x,th_y,th_z)
   d1[6] = -1 * getT(0, th_x);
   d1[8] = getT(0,th_x);
   d1[9] = getT(1,th_x);
-  --print(string.format("d1    => %d %d %d %d %d %d %d %d %d", d1[1],d1[2],d1[3],d1[4],d1[5],d1[6],d1[7],d1[8],d1[9]));
+  --print(string.format("d1    => %d %d %d %d %d %d %d %d %d",
+  --  d1[1],d1[2],d1[3],d1[4],d1[5],d1[6],d1[7],d1[8],d1[9]));
   -- d2
   d2[1] = getT(1,th_y);
   d2[3] = getT(0,th_y);
   d2[7] = -1*getT(0,th_y);
   d2[9] = getT(1,th_y);
-  --print(string.format("d2    => %d %d %d %d %d %d %d %d %d\n", d2[1],d2[2],d2[3],d2[4],d2[5],d2[6],d2[7],d2[8],d2[9]));
+  --print(string.format("d2    => %d %d %d %d %d %d %d %d %d\n",
+  --  d2[1],d2[2],d2[3],d2[4],d2[5],d2[6],d2[7],d2[8],d2[9]));
   -- d3
   d3[1] = getT(1,th_z);
   d3[2] = -1*getT(0,th_z);
   d3[4] = getT(0,th_z);
   d3[5] = getT(1,th_z);
-  --print(string.format("d3    => %d %d %d %d %d %d %d %d %d\n", d3[1],d3[2],d3[3],d3[4],d3[5],d3[6],d3[7],d3[8],d3[9]));
+  --print(string.format("d3    => %d %d %d %d %d %d %d %d %d\n",
+  --  d3[1],d3[2],d3[3],d3[4],d3[5],d3[6],d3[7],d3[8],d3[9]));
   --
   --
   -- matM
@@ -107,7 +110,8 @@ transform3Into2_NEW = function(x,y,z, cx,cy,cz, th_x,th_y,th_z)
   matM[7] = p7;
   matM[8] = p8;
   matM[9] = p9;
-  --print(string.format("matM  => %d %d %d %d %d %d %d %d %d\n", matM[1],matM[2],matM[3],matM[4],matM[5],matM[6],matM[7],matM[8],matM[9]));
+  --print(string.format("matM  => %d %d %d %d %d %d %d %d %d\n",
+  --  matM[1],matM[2],matM[3],matM[4],matM[5],matM[6],matM[7],matM[8],matM[9]));
   --
   -- matM2
   p1 = matM[1]*d3[1] + matM[2]*d3[4] + matM[3]*d3[7];
@@ -128,7 +132,8 @@ transform3Into2_NEW = function(x,y,z, cx,cy,cz, th_x,th_y,th_z)
   matM2[7] = p7;
   matM2[8] = p8;
   matM2[9] = p9;
-  --print(string.format("matM2 => %d %d %d %d %d %d %d %d %d\n",matM2[1],matM2[2],matM2[3],matM2[4],matM2[5],matM2[6],matM2[7],matM2[8],matM2[9]));
+  --print(string.format("matM2 => %d %d %d %d %d %d %d %d %d\n",
+  --  matM2[1],matM2[2],matM2[3],matM2[4],matM2[5],matM2[6],matM2[7],matM2[8],matM2[9]));
   --
   -- d4 AND d5
   -- d4
@@ -146,7 +151,8 @@ transform3Into2_NEW = function(x,y,z, cx,cy,cz, th_x,th_y,th_z)
   matS[1] = d4[1]-d5[1];
   matS[2] = d4[2]-d5[2];
   matS[3] = d4[3]-d5[3];
-  --print(string.format("matS  => %d %d %d %d %d %d %d %d %d\n",matS[1],matS[2],matS[3],matS[4],matS[5],matS[6],matS[7],matS[8],matS[9]));
+  --print(string.format("matS  => %d %d %d %d %d %d %d %d %d\n",
+  --  matS[1],matS[2],matS[3],matS[4],matS[5],matS[6],matS[7],matS[8],matS[9]));
   --
   -- ***********************
   --  matMV
