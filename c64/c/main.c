@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <conio.h>
+#include <time.h>
+#include <cbm.h>
 // GENERIC
 #include "env\3d.c"
 
@@ -12,6 +14,12 @@
 /* ******** */
 /* DATA     */
 /* ******** */
+typedef unsigned char byte;
+typedef unsigned word;
+byte B1 = 0;
+byte B2 = 0;
+byte F1 = 0;
+byte F2 = 0;
 // GENERAL
 int camera_x = 200;
 int camera_y = 335;
@@ -22,53 +30,52 @@ int th_z = 0;
 int start_x = 250;
 int start_y = 40;
 int start_z = 1500;
-int rxA = 0;
-int ryA = 0;
+unsigned char rxA = 0;
+unsigned char ryA = 0;
 // MODEL
 int cube_vertices[] = { 
 -100,-100,100,-100,100,100,-100,-100,-100,-100,100,-100,100,-100,100,100,100,100,100,-100,-100,100,100,-100
 };
-int cube_faces[] = {
+unsigned char cube_faces[] = {
 2,4,3,1,4,8,7,3,8,6,5,7,6,2,1,5,1,3,7,5,6,8,4,2
 };  
-int cube_2d[8*2];
-
+unsigned char cube_2d[8*2]; 
+unsigned int vertices_counter = 0;
 
 /* ********* */
 /* FUNCTIONS */
 /* ********* */
 // DRAW MODEL
 void draw_model() {
-  int k  = 0;
-  int f  = 1;
-  int face_index = 0;
-  int vc = 0;
-  int x2, y2, z2 = 0;
-  int x3, y3 = 0;
-
+  unsigned int mv  = 0; // model vertices
+  unsigned int vc = 0;  // mv counter
+  unsigned int mf  = 1;  // model faces
+  unsigned int fc = 0;  // mf counter
+  int x2, y2, z2 = 0; // 3D base + point
+  register unsigned char x3, y3 = 0;  // 2D equivalent
+  //
   /* CALCULATE 2D POINTS */
-  for (k; k<=sizeof(cube_vertices)/sizeof(cube_vertices[0])-3; k=k+3) {
-    x2 = start_x+cube_vertices[k+0];
-    y2 = start_y+cube_vertices[k+1];
-    z2 = start_z+cube_vertices[k+2];
+  for (mv; mv<=sizeof(cube_vertices)/sizeof(cube_vertices[0])-3; mv=mv+3) {
+    x2 = start_x+cube_vertices[mv+0];
+    y2 = start_y+cube_vertices[mv+1];
+    z2 = start_z+cube_vertices[mv+2];
     transform3Into2_NEW(&rxA,&ryA, x2,y2,z2, camera_x,camera_y,camera_z, th_x,th_y,th_z); 
+    vertices_counter = vertices_counter + 1;
     //printf("%d,%d,%d => %d x %d\n", x2,y2,z2, rxA,ryA);
     cube_2d[vc+0] = rxA;
     cube_2d[vc+1] = ryA;
     vc+=2;
   } /* for */
+  //return;
   tgi_clear();
-  tgi_setviewpage(0);
-  tgi_setdrawpage(1);
   tgi_gotoxy(cube_2d[0], cube_2d[1]);
   // DRAW LINES BETWEEN VERTICES BASED ON FACES DEFINITION
-  for (f; f<=sizeof(cube_faces)/sizeof(cube_faces[0])-1; f++) {
-    face_index = (cube_faces[f]*2)-2;
-    x3 = cube_2d[face_index+0];
-    y3 = cube_2d[face_index+1];
+  for (mf; mf<=sizeof(cube_faces)/sizeof(cube_faces[0])-1; mf++) {
+    fc = (cube_faces[mf]*2)-2;
+    x3 = cube_2d[fc+0];
+    y3 = cube_2d[fc+1];
     tgi_lineto(x3,y3);
   } /* for */
-  tgi_setviewpage(1);
 } /* draw_model */
 // TGI INIT
 void tgi() {
@@ -82,29 +89,37 @@ void tgi() {
 /* ********* */
 /* MAIN      */
 /* ********* */
-int main (void) {    
-    int i = 0;
-    int direction = 1;
-    /* WAIT */
-    cprintf("%s\n", "PRESS KEY TO PROCEED");    
-    cgetc();
-    clrscr();
+int main (void) {       
+    unsigned int direction = 1;
+    unsigned char should_run = 1;
     /* TGI */
     tgi();
+    /* RESET TIMER */
+    *(byte*) 0x00a1 = 0;
+    *(byte*) 0x00a2 = 0;      
     // LOOP
-    while (1) {                 
+    while (should_run) {                 
+      /**************/
       /* PROJECTION */
+      /**************/
       draw_model();
-      // MOVE
+      /* MOVE */
       start_x+=2*direction; 
-      if (start_x>=200) {
-        direction = -1;
-      }
-      else if (start_x <= 100) {
-        direction = 1;
-      }
-      ++i;
+      if (start_x>=255) { direction = -1; } // if
+      else if (start_x <= 100) { direction = 1; } // else   
+      /* PERFORMANCE */
+      if (vertices_counter > 1000) {
+        F1 = *(byte*) 0x00a1;
+        F2 = *(byte*) 0x00a2;       
+        printf("=> vc = %d => %d, %d\n", vertices_counter, F1,F2);              
+        *(byte*) 0x00a1 = 0;
+        *(byte*) 0x00a2 = 0;        
+        tgi_done();
+        should_run = 0;
+      } // if    
     } /* while */
+    /* END */
+    cprintf("%s\n", "FINISHED");    
     /* EXIT */
     return 0;
 } /* main */
