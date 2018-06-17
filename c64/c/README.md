@@ -25,6 +25,10 @@ ruby 0_parsed.rb your_file.obj
 
 Output from this command should include vertices list, vertices count and faces list. Need to copy and paste into ```main.c``` file in the ```Data->Model``` section. Please note that having lot of vertices gives C64 hardware will take time to compute. Drawing part is reasonable fast comparing to computational one.
 
+## Environment
+
+```generic` based perspective projection and completely new ortographic projection.
+
 ## What's next
 
 Next thing worth considering is to modify current vertices connection drawing to make it more like faces drawing so vertices will be grouped just as in the OBJ file. This would be a great preparation for further coloring and maybe even texturing.
