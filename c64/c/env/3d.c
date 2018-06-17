@@ -4,6 +4,7 @@
 /*   cos = 1               */
 /* *********************** */
 int getT(int f, int val) {
+  val = 0;
   //int newEntry = 0;
   // sin
   if (f == 0) {
@@ -180,3 +181,19 @@ void transform3Into2_NEW(unsigned char * rx, unsigned char * ry, int x, int y, i
   *ry = newEntry_y;
   return;
 } /* transform3Into2_NEW */
+
+
+/* *********************** */
+/* ortographic_projection  */
+/* *********************** */
+void ortographic_projection(unsigned char * rx, unsigned char * ry, int ax,int ay,int az, int sx,int sz, int cx,int cz) {  
+  int d = az/30;
+  int d2 = az/20;
+  int bx = (ax*1) + d;
+  int by = (ay*1) + d2 - 150;
+  
+  sx,sz,cx,cz=0;
+  
+  *rx = bx;
+  *ry = by;
+} /* ortographic_projection */

@@ -45,6 +45,14 @@ unsigned int vertices_counter = 0;
 /* ********* */
 /* FUNCTIONS */
 /* ********* */
+// DRAW BORDER
+void draw_border() {
+  tgi_gotoxy(0,0);
+  tgi_lineto(255,0);
+  tgi_lineto(255,199);
+  tgi_lineto(0,199);
+  tgi_lineto(0,0);
+} /* draw_border */
 // DRAW MODEL
 void draw_model() {
   unsigned int mv  = 0; // model vertices
@@ -59,7 +67,8 @@ void draw_model() {
     x2 = start_x+cube_vertices[mv+0];
     y2 = start_y+cube_vertices[mv+1];
     z2 = start_z+cube_vertices[mv+2];
-    transform3Into2_NEW(&rxA,&ryA, x2,y2,z2, camera_x,camera_y,camera_z, th_x,th_y,th_z); 
+    //transform3Into2_NEW(&rxA,&ryA, x2,y2,z2, camera_x,camera_y,camera_z, th_x,th_y,th_z); 
+    ortographic_projection(&rxA,&ryA, x2,y2,z2, 4,4, 4,4);
     vertices_counter = vertices_counter + 1;
     //printf("%d,%d,%d => %d x %d\n", x2,y2,z2, rxA,ryA);
     cube_2d[vc+0] = rxA;
@@ -67,7 +76,7 @@ void draw_model() {
     vc+=2;
   } /* for */
   //return;
-  tgi_clear();
+  //tgi_clear();
   tgi_gotoxy(cube_2d[0], cube_2d[1]);
   // DRAW LINES BETWEEN VERTICES BASED ON FACES DEFINITION
   for (mf; mf<=sizeof(cube_faces)/sizeof(cube_faces[0])-1; mf++) {
@@ -103,10 +112,11 @@ int main (void) {
       /* PROJECTION */
       /**************/
       draw_model();
+      draw_border();
       /* MOVE */
-      start_x+=2*direction; 
-      if (start_x>=255) { direction = -1; } // if
-      else if (start_x <= 100) { direction = 1; } // else   
+      //start_x+=2*direction; 
+      if (rxA>=250) { direction = -1; } // if
+      else if (rxA <= 180) { direction = 1; } // else   
       /* PERFORMANCE */
       if (vertices_counter > 1000) {
         F1 = *(byte*) 0x00a1;
@@ -120,6 +130,7 @@ int main (void) {
     } /* while */
     /* END */
     cprintf("%s\n", "FINISHED");    
+    printf("%d %d", rxA, ryA);
     /* EXIT */
     return 0;
 } /* main */
