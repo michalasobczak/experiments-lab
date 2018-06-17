@@ -27,7 +27,7 @@ Output from this command should include vertices list, vertices count and faces 
 
 ## Environment
 
-```generic` based perspective projection and completely new ortographic projection.
+```generic``` based perspective projection and completely new ortographic projection.
 
 ## What's next
 
