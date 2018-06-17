@@ -29,4 +29,4 @@ At ```80 MHz``` clock speed it reaches 300 vertices per second. Changing CPU clo
 
 ## Objectives
 
-3D environment calculations to compare performance across various devices.
+Graphics programming. If possible, using ```generic``` as reference.
