@@ -20,6 +20,7 @@ byte B1 = 0;
 byte B2 = 0;
 byte F1 = 0;
 byte F2 = 0;
+byte K  = 0;
 // GENERAL
 int camera_x = 200;
 int camera_y = 335;
@@ -76,7 +77,7 @@ void draw_model() {
     vc+=2;
   } /* for */
   //return;
-  //tgi_clear();
+  tgi_clear();
   tgi_gotoxy(cube_2d[0], cube_2d[1]);
   // DRAW LINES BETWEEN VERTICES BASED ON FACES DEFINITION
   for (mf; mf<=sizeof(cube_faces)/sizeof(cube_faces[0])-1; mf++) {
@@ -101,6 +102,7 @@ void tgi() {
 int main (void) {       
     unsigned int direction = 1;
     unsigned char should_run = 1;
+    unsigned char key = 0;
     /* TGI */
     tgi();
     /* RESET TIMER */
@@ -114,9 +116,9 @@ int main (void) {
       draw_model();
       draw_border();
       /* MOVE */
-      //start_x+=2*direction; 
-      if (rxA>=250) { direction = -1; } // if
-      else if (rxA <= 180) { direction = 1; } // else   
+      K = *(byte*) 0x00CB;  
+      if (K == 10) { direction = -1; start_x+=2*direction;  }
+      else if (K == 18) { direction = 1; start_x+=2*direction;  }
       /* PERFORMANCE */
       if (vertices_counter > 1000) {
         F1 = *(byte*) 0x00a1;
