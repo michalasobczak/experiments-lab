@@ -25,6 +25,35 @@ ruby 0_parsed.rb your_file.obj
 
 Output from this command should include vertices list, vertices count and faces list. Need to copy and paste into ```main.c``` file in the ```Data->Model``` section. Please note that having lot of vertices gives C64 hardware will take time to compute. Drawing part is reasonable fast comparing to computational one.
 
+## Memory map
+Starting from ```0x0400 (1024d)``` which is ```text screen``` we have probably until ```0x7FF (2047d)```. Then we have ```0x800 (2048d)``` where our program begins. Somewhere beetwen ```0x22E9 (8937d)``` and
+```0xCFFF (53247d)``` there is empty space which should be further allocatable. 
+
+Stack grows downwards from ```0xCFFF (53247d)```. Over there we have automatic variables and calling information stored. It adjoins heap space which grows upwards in memory and stores all the dynamic memory allocations. 
+
+Starting from ```0xD000 (53248d) we have VIC-II configuration which lasts at ```0xD3FF (54271d)```.
+
+Enabled by default:
+
+```
+  I/O:
+    $DE00-$DEFF, 56832-57087
+    $DF00-$DFFF, 57088-57343
+  KERNAL ROM:
+    $E000-$FFFF, 57344-65535
+```
+
+Unsure about the following:
+
+```
+  SID:
+    $D400-$D7FF, 54272-55295
+  CIA: 
+    $DC00-$DCFF, 56320-56575
+    $DD00-$DDFF, 56576-56831
+```    
+    
+
 ## Environment
 
 ```generic``` based perspective projection and completely new ortographic projection.
