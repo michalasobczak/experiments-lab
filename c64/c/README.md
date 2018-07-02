@@ -31,7 +31,7 @@ Starting from ```0x0400 (1024d)``` which is ```text screen``` we have probably u
 
 ```Stack``` grows downwards from ```0xCFFF (53247d)```. Over there we have automatic variables and calling information stored. It adjoins ```heap``` space which grows upwards in memory and stores all the dynamic memory allocations. 
 
-Starting from ```0xD000 (53248d) we have ```VIC-II configuration``` which lasts at ```0xD3FF (54271d)```.
+Starting from ```0xD000 (53248d)``` we have ```VIC-II configuration``` which lasts at ```0xD3FF (54271d)```.
 
 Enabled by default:
 
