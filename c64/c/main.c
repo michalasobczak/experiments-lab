@@ -20,6 +20,7 @@ byte B2 = 0;
 byte F1 = 0;
 byte F2 = 0;
 byte K  = 0;
+byte previousK = 0;
 // GENERAL
 int camera_x = 200;
 int camera_y = 335;
@@ -30,6 +31,10 @@ int th_z = 0;
 int start_x = 250;
 int start_y = 40;
 int start_z = 1500;
+int previous_x = 0;
+int previous_y = 0;
+int previous_z = 0;
+unsigned char movement_detected = 0;
 unsigned char rxA = 0;
 unsigned char ryA = 0;
 // MODEL
@@ -40,6 +45,7 @@ unsigned char cube_faces[] = {
 2,4,3,1,4,8,7,3,8,6,5,7,6,2,1,5,1,3,7,5,6,8,4,2
 };  
 unsigned char cube_2d[8*2]; 
+unsigned char cube_2d_previous_frame[8*2]; 
 unsigned int vertices_counter = 0;
 
 /* ********* */
@@ -56,6 +62,7 @@ void draw_border() {
 } /* draw_border */
 // DRAW MODEL
 void draw_model() {
+  unsigned int i = 0;
   unsigned int mv  = 0;               // model vertices
   unsigned int vc = 0;                // mv counter
   unsigned int mf  = 1;               // model faces
@@ -81,18 +88,37 @@ void draw_model() {
     vc+=2;
   } /* for */
   //return;
-  tgi_clear();
+  //tgi_clear();
   //video_clear();
   tgi_gotoxy(cube_2d[0], cube_2d[1]);
   //video_gotoxy(cube_2d[0], cube_2d[1]);
   // DRAW LINES BETWEEN VERTICES BASED ON FACES DEFINITION
-  for (mf; mf<=sizeof(cube_faces)/sizeof(cube_faces[0])-1; mf++) {
+  for (mf=1; mf<=sizeof(cube_faces)/sizeof(cube_faces[0])-1; mf++) {
     fc = (cube_faces[mf]*2)-2;
     x3 = cube_2d[fc+0];
     y3 = cube_2d[fc+1];
     tgi_lineto(x3,y3);
     //video_lineto(x3,y3);
   } /* for */
+  //
+  // OVERDRAW PREVIOUS LINES FROM 1 FRAME BEFORE
+  if (movement_detected == 1) {
+    tgi_setcolor(TGI_COLOR_BLACK);
+    tgi_gotoxy(cube_2d_previous_frame[0], cube_2d_previous_frame[1]);
+    for (mf=1; mf<=sizeof(cube_faces)/sizeof(cube_faces[0])-1; mf++) {
+      fc = (cube_faces[mf]*2)-2;
+      x3 = cube_2d_previous_frame[fc+0];
+      y3 = cube_2d_previous_frame[fc+1];
+      tgi_lineto(x3,y3);
+    }
+    previousK = K;
+    tgi_setcolor(TGI_COLOR_WHITE);
+    //
+    movement_detected = 0;
+  }
+  for (i=0; i<=sizeof(cube_2d)/sizeof(cube_2d[0])-1; i++) {
+    cube_2d_previous_frame[i] = cube_2d[i];
+  }
 } /* draw_model */
 // TGI INIT
 void tgi() {
@@ -119,15 +145,15 @@ int main (void) {
     *(byte*) 0x00a2 = 0;      
     // LOOP
     while (should_run) {                 
+      /* MOVE */
+      K = *(byte*) 0x00CB;  
+      if (K == 10) { direction = -1; start_x+=4*direction; movement_detected = 1;  }
+      else if (K == 18) { direction = 1; start_x+=4*direction; movement_detected = 1; }
       /**************/
       /* PROJECTION */
       /**************/
       draw_model();
       draw_border();
-      /* MOVE */
-      K = *(byte*) 0x00CB;  
-      if (K == 10) { direction = -1; start_x+=4*direction;  }
-      else if (K == 18) { direction = 1; start_x+=4*direction;  }
       /* PERFORMANCE */
       if (vertices_counter > 1000) {
         F1 = *(byte*) 0x00a1;
