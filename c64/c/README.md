@@ -52,7 +52,39 @@ Unsure about the following:
     $DC00-$DCFF, 56320-56575
     $DD00-$DDFF, 56576-56831
 ```    
-    
+
+## TGI replacement
+Instead of using TGI library, there is a possiblity to mimic its behavior and improve it to some extent. However there is certain complexity which needs to be challenged appropriately. The following code enters bitmap mode and selects VIC-II 2nd bank.
+
+```
+// VIDEO INIT
+void video_init() {
+  printf("video_init\n");
+  // DATA DIRECTION
+  TMP1 = *(byte*) 0xDD02;
+  TMP1 = TMP1 | 3;
+  *(byte*) 0xDD02 = TMP1;
+  // VIC-II BANK
+  TMP1 = *(byte*) 0xDD00;
+  TMP1 = TMP1 & 252;
+  //TMP1 = TMP1 | 1;
+  *(byte*) 0xDD00 = TMP1;
+  // BITMAP LOCATION, RELATIVE TO VIC-II BANK
+  // POKE53272,PEEK(53272)OR8
+  //TMP2 = *(byte*) 0xD018;
+  //TMP2 = TMP2 | 8;
+  *(byte*)0xD018 = 0x48;
+  // BITMAP MODE
+  // 10 POKE53265,PEEK(53265)OR32
+  TMP1 = *(byte*) 0xD011;
+  TMP1 = TMP1 | 32;  
+  *(byte*) 0xD011 = TMP1;
+  // HIGH BYTE
+  //*(word*)0x0288 = 128; 
+  // INITIALLY CLEAR THE BUFFER
+  video_clear();
+} // video_init
+```
 
 ## Environment
 
