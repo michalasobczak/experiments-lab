@@ -1,8 +1,10 @@
 # retro-lab
 
+> **All code in this repository was written by hand, without the use of AI** — between 2005 and 2019, long before AI coding assistants existed.
+
 Hobby experiments from 2005–2019: retro computers, bare-metal x86, a hand-made 3D engine and a microcontroller.
 They share one idea — take the same simple 3D math (rotation matrices, a camera, perspective division) and see how far it goes on very different hardware, from a phone browser to a 1 MHz 8-bit computer.
-All of it was written by hand, without AI. Each folder used to be a separate repository; its full commit history is kept here.
+Each folder used to be a separate repository; its full commit history is kept here.
 
 ## [js3d-engine](js3d-engine) — a 3D engine in JavaScript (2013)
 
