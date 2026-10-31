@@ -12,10 +12,12 @@ This engine is the reference implementation for every port below. On an Intel At
 
 ## [c64](c64) — Commodore 64: restoration and 3D in three languages (2018)
 
-A boxed Commodore 64, taken apart, cleaned and restored (photo log in [restoration](c64/restoration)), then programmed to render the same rotating 3D wireframe three times:
+A boxed Commodore 64, taken apart, cleaned and restored (photo log in [restoration](c64/restoration)), then used to port the same 3D wireframe renderer to the three languages the machine can realistically be programmed in:
 - **BASIC 2.0** — the projection math alone, timed in ticks, to see how expensive it is before drawing anything; plus entering bitmap mode with two `POKE`s,
 - **C with cc65** — a cube of vertices and faces, redrawn on key press, with cc65's slow TGI library replaced by direct VIC-II and CIA register access,
-- **6502 assembly with DASM** — the fastest of the three.
+- **6502 assembly with DASM** — the start of the third port: DASM macros wrapping KERNAL and BASIC ROM routines, started with `SYS 4096`.
+
+The same algorithm in three languages turned out to be a clear lesson in the cost of abstraction: on 8-bit hardware drawing is cheap and math is expensive.
 
 Developed in the VICE emulator and checked on the real machine through S-Video and a USB frame grabber.
 → [Write-up](https://michalasobczak.pl/posts/commodore-64-restoration-and-3d-in-basic-c-and-assembly.html)
