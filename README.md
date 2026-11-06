@@ -2,6 +2,8 @@
 
 > **All code in this repository was written by hand, without the use of AI** — between 2005 and 2019, long before AI coding assistants existed. As a result, it contains original, one-of-a-kind human mistakes and flawed logic — the very things that make us human.
 
+> *A plan without evaluation is just a longer road to the same answer.*
+
 Hobby experiments from 2005–2019: retro computers, bare-metal x86, a hand-made 3D engine and a microcontroller.
 They share one idea — take the same simple 3D math (rotation matrices, a camera, perspective division) and see how far it goes on very different hardware, from a phone browser to a 1 MHz 8-bit computer.
 Each folder used to be a separate repository; its full commit history is kept here.
