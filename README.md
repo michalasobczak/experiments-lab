@@ -2,8 +2,6 @@
 
 > **All code in this repository was written by hand, without the use of AI** — between 2005 and 2019, long before AI coding assistants existed. As a result, it contains original, one-of-a-kind human mistakes and flawed logic — the very things that make us human.
 
-> *A plan without evaluation is just a longer road to the same answer.*
-
 Hobby experiments from 2005–2019: retro computers, bare-metal x86, a hand-made 3D engine and a microcontroller.
 They share one idea — take the same simple 3D math (rotation matrices, a camera, perspective division) and see how far it goes on very different hardware, from a phone browser to a 1 MHz 8-bit computer.
 Each folder used to be a separate repository; its full commit history is kept here.
@@ -37,6 +35,14 @@ Two programs that run straight on the CPU after the BIOS hands over control: no 
 ## [esp8266](esp8266) — 3D math on a microcontroller (2018)
 
 The projection part of js3d-engine rewritten in Lua for the NodeMCU firmware on an ESP8266 — a Wi-Fi chip with a 32-bit Tensilica core and 80 KB of data RAM. There is no display: the chip computes projected vertices and reports them over the serial console, with free heap measured before and after. It uses fixed-point integers, so it runs on both integer and float firmware builds. Result: 300 vertices per second at 80 MHz, 600 at 160 MHz. The folder also documents building, flashing and recovering the firmware.
+
+## Experiments
+
+Closed or paused experiments.
+
+| Experiment | Status | Verdict |
+|---|---|---|
+| [archimedev](https://github.com/michalasobczak/experiments-lab/blob/2756d9b/archimedev/VERDICT.md) — a small local model (Ministral 3B) made to do real coding work: own agent, then a model amplifier in front of Claude Code / OpenCode | paused 2026-11-05 | *A plan without evaluation is just a longer road to the same answer.* Some theses are confirmed (running the code and showing the error: +5.5 pp; prompt cache: −38–50% prompt time), but that is not enough to say the amplifier in this form is worth continuing. |
 
 ## License
 
