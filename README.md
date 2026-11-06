@@ -6,7 +6,7 @@ Closed or paused experiments.
 
 | Experiment | Status | Verdict |
 |---|---|---|
-| [archimedev](https://github.com/michalasobczak/experiments-lab/blob/2756d9b/archimedev/VERDICT.md) — a small local model (Ministral 3B) made to do real coding work: own agent, then a model amplifier in front of Claude Code / OpenCode | paused 2026-11-05 | *A plan without evaluation is just a longer road to the same answer.* Some theses are confirmed (running the code and showing the error: +5.5 pp; prompt cache: −38–50% prompt time), but that is not enough to say the amplifier in this form is worth continuing. |
+| archimedev — a small local model (Ministral 3B) made to do real coding work: own agent, then a model amplifier in front of Claude Code / OpenCode | paused 2026-11-05 | *A plan without evaluation is just a longer road to the same answer.* Some theses are confirmed (running the code and showing the error: +5.5 pp; prompt cache: −38–50% prompt time), but that is not enough to say the amplifier in this form is worth continuing. |
 
 ## Retro
 
